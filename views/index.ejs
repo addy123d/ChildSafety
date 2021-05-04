@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+
+    <title>Child Location</title>
+</head>
+<style>
+    #map {
+        height: 640px;
+        margin: 0px 4px;
+    }
+</style>
+
+<body>
+    <h1>Child Location</h1>
+    <div id="map"></div>
+
+
+    <div class="recent">
+    </div>
+</body>
+<script>
+    const recent = document.querySelector(".recent");
+
+
+    let mymap = L.map('map').setView([0, 0], 5);
+    let tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    let tiles = L.tileLayer(tileUrl);
+    tiles.addTo(mymap);
+
+
+    // const marker = L.marker([19.2403, 73.1305]).addTo(mymap);
+    // marker.bindPopup("Heyy !!!!");
+
+    setInterval(function () {
+        // Request server for data !
+        fetch('/data')
+            .then(res => res.json())
+            .then(function (response) {
+                console.log("Response :", response);
+
+                if (response.destroy === "Session Destroyed !") {
+                    location.href = "http://127.0.0.1:5000/home";
+                } else {
+                    plot(response);
+                }
+
+
+            })
+            .catch(function (error) {
+                console.log("Error :", error);
+            });
+
+    }, 5000);
+
+    function plot(res) {
+        console.log(res);
+        for (let i = 0; i < res.length; i++) {
+            const marker = L.marker([res[i].latitude, res[i].longitude]).addTo(mymap);
+            const string = `Latitude : ${res[i].latitude} | Longitude : ${res[i].longitude} | Time : ${res[i].time}`;
+            marker.bindPopup(string);
+        }
+
+        // Update recent location !
+        recent.innerHTML = `<h2>Recent location was Latitude : ${res[res.length - 1].latitude}, Longitude : ${res[res.length - 1].longitude}
+                            . <strong>Time :</strong>${res[res.length - 1].time}</h2>`;
+    }
+
+
+
+</script>
+
+</html>
