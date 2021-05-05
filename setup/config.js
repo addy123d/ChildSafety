@@ -1,5 +1,5 @@
 const setting = {
-    url: "mongodb+srv://Childrensafety:IgpeiWOVW0iwXZxr@cluster0.4y3sa.mongodb.net/Project0?retryWrites=true&w=majority"
+    url: "mongodb+srv://<username>:<password>@cluster0.4y3sa.mongodb.net/Project0?retryWrites=true&w=majority"
 }
 
 module.exports = setting;
