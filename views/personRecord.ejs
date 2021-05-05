@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Poppins&family=Josefin+Sans&family=Antonio&display=swap"
+        rel="stylesheet">
+    <style>
+        html,
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .accordion {
+            background-color: #eee;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .active,
+        .accordion:hover {
+            background-color: #ccc;
+        }
+
+        .panel {
+            padding: 0 18px;
+            display: none;
+            background-color: white;
+            overflow: hidden;
+        }
+
+        li {
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button class="accordion">
+        <%=user.name%>
+    </button>
+    <div class="panel">
+        <ul>
+            <%for(let i=0; i< user.coordinates.length;i++){%>
+                <li>
+                    <h2>Latitude : <span>
+                            <%=user.coordinates[i].latitude%>
+                        </span> | Longitude :
+                        <span>
+                            <%=user.coordinates[i].longitude%>
+                        </span> | <strong>Time</strong> : <span>
+                            <%=user.coordinates[i].time%>
+                        </span>
+                    </h2>
+                </li>
+                <%}%>
+        </ul>
+    </div>
+
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>
