@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Link awesome CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Poppins&family=Josefin+Sans&family=Antonio&display=swap"
+        rel="stylesheet">
+
+    <title>History</title>
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    html,
+    body {
+        background: #f1f3f8;
+    }
+
+    .explorePage {
+        background: #f1f3f8;
+        background-size: cover;
+        min-height: 100vh;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 20px;
+        align-items: stretch;
+        margin: 3%;
+    }
+
+    .grid>article {
+        border: 1px solid #ccc;
+        box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
+    }
+
+    .grid>article img {
+        max-width: 100%;
+    }
+
+    .text {
+        padding: 0 20px 20px;
+    }
+
+    .text>a button {
+        background: #2e2d2d;
+        color: #ffffff;
+        font-weight: 500;
+        font-family: 'Poppins', sans-serif;
+        text-transform: uppercase;
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-shadow: 1px 1px 2px #000000;
+        transition: .3s;
+        border: 0;
+        padding: 10px;
+        width: 100%;
+        cursor: pointer;
+    }
+
+    .text>a button:hover {
+        background: rgb(72, 77, 82);
+    }
+
+    /* LOGO */
+    .logo {
+        margin: 2%;
+    }
+
+    .logo h2 {
+        font-size: 2.3rem;
+        color: #222;
+        font-family: 'Antonio', sans-serif;
+        user-select: none;
+    }
+
+    .logo span {
+        color: rgb(25, 48, 70);
+        font-size: 2.5rem;
+    }
+
+    /* Text */
+    .text h3 {
+        text-align: center;
+        font-family: 'Poppins', sans-serif;
+        margin: 3%;
+    }
+
+    .text p {
+        font-family: 'Poppins', sans-serif;
+        text-align: center;
+        margin: 4%;
+    }
+
+    /* Search */
+    .input,
+    .searchBtn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    input {
+        padding: 1em;
+        outline: none;
+        border: none;
+        border-radius: 10px;
+        background: #ffffff;
+        box-shadow: inset 11px 11px 22px #e6e6e6,
+            inset -11px -11px 22px #ffffff;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .searchBtn button {
+        margin-top: 2%;
+        padding: .7em 1em .7em 1em;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        background: rgb(25, 48, 70);
+        color: #ffffff;
+        font-weight: 500;
+        font-family: 'Poppins',
+            sans-serif;
+        border-radius: 5px;
+        font-size: .8rem;
+        text-transform: uppercase;
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-shadow: 1px 1px 2px #000000;
+        transition: .3s;
+    }
+
+    .searchBtn button:hover {
+        background: rgb(72, 77, 82);
+    }
+
+
+    @media (max-width: 730px) {
+        .grid {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    @media (max-width: 530px) {
+        .grid {
+            grid-template-columns: 100%;
+        }
+    }
+</style>
+
+<body>
+
+    <section class="explorePage">
+
+        <div class="grid">
+            <%for(let i=0; i< users.length; i++){%>
+                <article>
+                    <div class="text">
+                        <h3>
+                            <%=users[i].name%>
+                        </h3>
+                        <p><strong>Start Time :</strong>
+                            <%=users[i].timeStamp%>
+                        </p>
+                        <a href="/person/<%=users[i]._id%>"><button>View <i class="fa fa-eye"
+                                    aria-hidden="true"></i></button></a>
+                    </div>
+                </article>
+                <%}%>
+        </div>
+    </section>
+
+</body>
+
+</html>

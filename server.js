@@ -80,12 +80,7 @@ function redirectHome(request, response, next) {
 
 
 app.get("/home", checkSession, function (request, response) {
-    response.send(`<h1>Child Details</h1>
-                    <form action="/childdetails" method="POST">
-                    <input type="text" name="name" placeholder="Enter Name" autocomplete="off">
-                    <input type="datetime-local" name="end_time">
-                    <button>Submit</button>
-                    </form>`)
+    response.render("register");
 });
 
 
@@ -196,6 +191,34 @@ app.get("/data", redirectHome, function (request, response) {
         })
         .catch(function (error) {
             console.log("Something went wrong :", error);
+        });
+});
+
+
+app.get("/all", function (request, response) {
+    User.find()
+        .then(function (users) {
+            response.render("records", {
+                users
+            });
+        })
+        .catch(function (error) {
+            console.log(`Something went wrong : ${error}`);
+        });
+});
+
+app.get("/person/:id", function (request, response) {
+    User.findOne({
+            _id: request.params.id
+        })
+        .then(function (user) {
+            console.log("User : ", user);
+            response.render("personRecord", {
+                user
+            });
+        })
+        .catch(function (error) {
+            console.log(`Something went wrong : ${error}`);
         });
 });
 

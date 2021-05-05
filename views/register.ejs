@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500&family=Poppins&family=Montserrat&family=Josefin+Sans:wght@300&display=swap"
+        rel="stylesheet">
+    <title>Enter Details</title>
+</head>
+<style>
+    @import url("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .fill {
+        background: linear-gradient(rgba(240, 241, 137, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1189&q=80");
+        background-size: cover;
+        min-height: 100vh;
+    }
+
+    .container {
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .form {
+        background: #ffffff;
+        color: #1c1d1e;
+        padding: 3em;
+        padding-top: 2em;
+        border-radius: 5px;
+    }
+
+    .form>form div {
+        margin-bottom: 5%;
+    }
+
+    input[type="text"],
+    input[type="datetime-local"] {
+        padding: .8em;
+        background: #f1f3f8;
+        outline: none;
+        border: none;
+        border-radius: 5px;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn button,
+    .btn .history_btn {
+        margin-top: 3%;
+        padding: .6em 1.5em .6em 1.5em;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bolder;
+        text-transform: uppercase;
+        background: #ff3d67;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px #000000;
+        letter-spacing: 1px;
+        border-radius: 6px;
+        cursor: pointer;
+        outline: none;
+        border: none;
+    }
+
+    .btn .history_btn {
+        background: #2e2d2d;
+    }
+
+    .form .title {
+        margin-bottom: 10%;
+    }
+
+    .title h2 {
+        font-family: 'Montserrat', sans-serif;
+        padding-left: 10px;
+        border-left: 3px solid #1c1d1e;
+    }
+
+    .title h2 i {
+        font-size: 1.8rem;
+        padding-left: 5px;
+        color: rgb(252, 186, 99);
+        animation: blink 1s infinite linear;
+        transition: all .3s ease-in;
+    }
+
+
+    @keyframes blink {
+
+        0%,
+        10%,
+        50% {
+            color: rgb(252, 186, 99);
+        }
+
+        80%,
+        90%,
+        100% {
+            color: rgb(243, 129, 63);
+        }
+    }
+
+
+
+    /* Media Query ! */
+    @media (max-width : 375px) {
+        .form {
+            padding: 2em;
+            padding-top: 1.5em;
+        }
+
+        .title {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .title h2 {
+            font-size: 1.5rem;
+            border: none;
+        }
+
+        .form>div {
+            margin-bottom: 10%;
+        }
+
+        input[type="text"],
+        input[type="datetime-local"] {
+            padding: .8em;
+            font-size: .75rem;
+        }
+
+        .btn button {
+            font-size: 1rem;
+        }
+    }
+</style>
+
+<body>
+    <section class="fill">
+        <div class="container">
+            <div class="form">
+                <div class="title">
+                    <h2>Tracking <i class="fa fa-map-marker" aria-hidden="true"></i></h2>
+                </div>
+                <form action="/childdetails" method="POST">
+                    <div class="name">
+                        <input type="text" name="name" placeholder="Enter Name" autocomplete="off">
+                    </div>
+                    <div class="time">
+                        <input type="datetime-local" name="end_time" value="2021-05-05T00:00">
+                    </div>
+
+                    <div class="btn">
+                        <button>Track</button>
+                    </div>
+                </form>
+                <div class="btn">
+                    <a href="/all"><button class="history_btn">History <i class="fa fa-history"
+                                aria-hidden="true"></i></button></a>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

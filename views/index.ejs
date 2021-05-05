@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500&family=Poppins&family=Montserrat&family=Josefin+Sans:wght@300&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
         integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
         crossorigin="" />
@@ -15,32 +19,67 @@
     <title>Child Location</title>
 </head>
 <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    html,
+    body {
+        background: #f1f3f8;
+    }
+
     #map {
-        height: 640px;
-        margin: 0px 4px;
+        background-size: cover;
+        min-height: 85vh;
+    }
+
+    .recent {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50px;
+        background: #f1f3f8;
+        box-shadow: 20px 20px 32px #d9dbdf,
+            -20px -20px 32px #ffffff;
+
+        padding: .8em;
+        color: #1c1d1e;
+        font-family: 'Montserrat', sans-serif;
+        margin: 1%;
+    }
+
+    .recent h2 {
+        font-size: 1.3rem;
+    }
+
+    .recent h2 span {
+        color: #ff3d67;
+    }
+
+
+    /* Media Query ! */
+    @media (max-width : 375px) {
+        .recent h2 {
+            font-size: 1rem;
+        }
     }
 </style>
 
 <body>
-    <h1>Child Location</h1>
-    <div id="map"></div>
-
-
+    <div id="map">
+    </div>
+    <!-- Recent Updates -->
     <div class="recent">
     </div>
 </body>
 <script>
     const recent = document.querySelector(".recent");
-
-
-    let mymap = L.map('map').setView([0, 0], 5);
+    let mymap = L.map('map').setView([0, 0], 13);
     let tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     let tiles = L.tileLayer(tileUrl);
     tiles.addTo(mymap);
 
-
-    // const marker = L.marker([19.2403, 73.1305]).addTo(mymap);
-    // marker.bindPopup("Heyy !!!!");
 
     setInterval(function () {
         // Request server for data !
@@ -50,7 +89,7 @@
                 console.log("Response :", response);
 
                 if (response.destroy === "Session Destroyed !") {
-                    location.href = "http://127.0.0.1:5000/home";
+                    location.href = `${location.origin}/home`;
                 } else {
                     plot(response);
                 }
@@ -72,10 +111,8 @@
         }
 
         // Update recent location !
-        recent.innerHTML = `<h2>Recent location was Latitude : ${res[res.length - 1].latitude}, Longitude : ${res[res.length - 1].longitude}
-                            . <strong>Time :</strong>${res[res.length - 1].time}</h2>`;
+        recent.innerHTML = `<h2>Latitude : <span>${res[res.length - 1].latitude}</span> | Longitude : <span>${res[res.length - 1].longitude}</span></h2>`;
     }
-
 
 
 </script>
